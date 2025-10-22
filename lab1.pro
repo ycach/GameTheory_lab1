@@ -12,10 +12,14 @@ CONFIG += c++17
 include(DinamicTable/DinamicTable.pri)
 
 SOURCES += \
+    ChoseSing/AdaptiveDinamicTable.cpp \
+    ChoseSing/MinMaxButton.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    ChoseSing/AdaptiveDinamicTable.h \
+    ChoseSing/MinMaxButton.h \
     mainwindow.h
 
 FORMS += \

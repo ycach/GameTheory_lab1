@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 14.0.1, 2025-10-22T00:49:18. -->
+<!-- Written by QtCreator 14.0.1, 2025-10-22T03:25:21. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -242,10 +242,10 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph &quot;dwarf,4096&quot; -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/4 курс/теория игр/1/lab1/lab1.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/4 курс/теория игр/1/lab1/lab1.pro</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">lab12</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/4 курс/теория игр/1/lab1/GameTheory_lab1/lab1.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/4 курс/теория игр/1/lab1/GameTheory_lab1/lab1.pro</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>

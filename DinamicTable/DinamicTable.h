@@ -2,36 +2,42 @@
 #define DINAMICTABLE_H
 #include <QTableWidget>
 #include <QPushButton>
+#include "MatrixData/Matrix.h"
 
 class DinamicTable : public QTableWidget{
     Q_OBJECT
 public:
-    DinamicTable(int active_rows = 4, int active_columns = 4, QWidget* parent = nullptr);
+    DinamicTable(int active_rows = 4, int active_columns = 4, int title_rows = 2, int title_cols = 1, QWidget* parent = nullptr);
     ~DinamicTable() = default;
 
-    void AddActiveRow();
-    void RemoveActiveRow(int rowIndex);
-    void AddActiveColumn();
-    void RemoveActiveColumn(int colIndex);
+    virtual void AddActiveRow();
+    virtual void RemoveActiveRow(int rowIndex);
+    virtual void AddActiveColumn();
+    virtual void RemoveActiveColumn(int colIndex);
 
-    int GetTitleRows();
-    int GetTitleColumns();
+    int GetTitleRows() const;
+    int GetTitleColumns() const;
+
+    int GetDataRows() const;
+    int GetDataColumns() const;
+
+    Matrix<double> GetData();
 
 signals:
     void SignalColumnRemoved(int removedIndex);
     void SignalRowRemoved(int removedIndex);
 
-private:
+protected:
     int active_rows;
     int active_columns;
 
-    int titles_rows = 2;
-    int titles_columns = 1;
+    int titles_rows;
+    int titles_columns;
 
-
-
-    void CreateTitlesStile();
+    virtual void CreateTitlesStile();
     void CreateAddButtons();
+private:
+    bool ValidItem(QTableWidgetItem* item);
 
 };
 

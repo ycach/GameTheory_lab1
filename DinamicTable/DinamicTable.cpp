@@ -4,9 +4,11 @@
 #include <QLineEdit>
 #include <QTimer>
 
-DinamicTable::DinamicTable(int active_rows, int active_columns, QWidget* parent) : QTableWidget(parent){
+DinamicTable::DinamicTable(int active_rows, int active_columns, int title_rows, int title_cols, QWidget* parent) : QTableWidget(parent){
     this->active_rows = active_rows;
     this->active_columns = active_columns;
+    this->titles_rows = title_rows;
+    this->titles_columns = title_cols;
 
     verticalHeader()->setVisible(false);
     horizontalHeader()->setVisible(false);
@@ -27,7 +29,7 @@ void DinamicTable::CreateTitlesStile(){
         qWarning() << "Таблица слишком мала для стиля заголовков";
         return;
     }
-    setSpan(0, 0, 2, 1);
+    setSpan(0, 0, titles_rows, 1);
     QTableWidgetItem *leftTitle = new QTableWidgetItem("Заголовок слева");
     leftTitle->setTextAlignment(Qt::AlignCenter);
     setItem(0, 0, leftTitle);
@@ -36,7 +38,7 @@ void DinamicTable::CreateTitlesStile(){
     //merging cells of the first row
     int columnsToMerge = columnCount() - titles_columns;
     if (columnsToMerge > 0) {
-        setSpan(0, 1, 1, columnsToMerge);
+        setSpan(0, titles_columns, 1, columnsToMerge);
 
         QTableWidgetItem *topTitle = new QTableWidgetItem("Основной заголовок");
         topTitle->setTextAlignment(Qt::AlignCenter);
@@ -246,13 +248,71 @@ void DinamicTable::RemoveActiveColumn(int colIndex){
 }
 
 
-int DinamicTable::GetTitleRows(){
+int DinamicTable::GetTitleRows() const{
     return titles_rows;
 }
-int DinamicTable::GetTitleColumns(){
+int DinamicTable::GetTitleColumns() const{
     return titles_columns;
 }
 
+int DinamicTable::GetDataRows() const{
+    return active_rows;
+}
+int DinamicTable::GetDataColumns() const{
+    return active_columns;
+}
+
+Matrix<double> DinamicTable::GetData(){
+    Matrix<double> data(active_rows, active_columns);
+    for (int i = 0; i < active_rows; ++i) {
+        for (int j = 0; j < active_columns; ++j) {
+            int row = titles_rows + i;
+            int col = titles_columns + j;
+
+            QTableWidgetItem *item = this->item(row, col);
+
+            if (!item) {
+                item = new QTableWidgetItem("-");
+                setItem(row, col, item);
+            }
+
+            if (ValidItem(item)) {
+                double value = item->text().trimmed().toDouble();
+                data[i][j] = value;
+            }
+            else{
+                data[i][j] = 0.0;
+            }
+        }
+    }
+    return data;
+}
+
+bool DinamicTable::ValidItem(QTableWidgetItem* item)
+{
+
+    if (!item) {
+        return false;
+    }
+
+    QString text = item->text().trimmed();
+    if (text.isEmpty()) {
+        item->setBackground(QColor(255, 200, 200));
+        return false;
+    }
+
+    bool ok = false;
+    double value = text.toDouble(&ok);
+
+    if (ok) {
+        item->setBackground(QBrush());
+        return true;
+    } else {
+        item->setBackground(QColor(255, 200, 200));
+        return false;
+    }
+    return false;
+}
 //Title
 Title::Title(int index, bool is_column, DinamicTable* parent) : QWidget(parent){
     this->index = index;
