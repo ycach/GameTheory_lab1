@@ -292,12 +292,14 @@ bool DinamicTable::ValidItem(QTableWidgetItem* item)
 {
 
     if (!item) {
+        emit ErrorGetData();
         return false;
     }
 
     QString text = item->text().trimmed();
     if (text.isEmpty()) {
         item->setBackground(QColor(255, 200, 200));
+        emit ErrorGetData();
         return false;
     }
 
@@ -309,9 +311,9 @@ bool DinamicTable::ValidItem(QTableWidgetItem* item)
         return true;
     } else {
         item->setBackground(QColor(255, 200, 200));
+        emit ErrorGetData();
         return false;
     }
-    return false;
 }
 //Title
 Title::Title(int index, bool is_column, DinamicTable* parent) : QWidget(parent){

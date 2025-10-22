@@ -13,14 +13,18 @@ include(DinamicTable/DinamicTable.pri)
 include(ResultShower/ResultShower.pri)
 
 SOURCES += \
+    CalcButton.cpp \
     CalcFunctions.cpp \
+    CastomResultShower/CastomRecord.cpp \
     ChoseSing/AdaptiveDinamicTable.cpp \
     ChoseSing/MinMaxButton.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    CalcButton.h \
     CalcFunctions.h \
+    CastomResultShower/CastomRecord.h \
     ChoseSing/AdaptiveDinamicTable.h \
     ChoseSing/MinMaxButton.h \
     mainwindow.h

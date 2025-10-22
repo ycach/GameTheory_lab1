@@ -27,6 +27,8 @@ signals:
     void SignalColumnRemoved(int removedIndex);
     void SignalRowRemoved(int removedIndex);
 
+    void ErrorGetData();
+
 protected:
     int active_rows;
     int active_columns;

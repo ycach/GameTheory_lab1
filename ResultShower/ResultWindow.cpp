@@ -30,6 +30,8 @@ ResultWindow::ResultWindow(QString title, QWidget* parent) : QGroupBox(title, pa
 
     main_layout->addWidget(records_box);
     main_layout->addLayout(del_layout);
+
+    setMinimumHeight(300);
 }
 void ResultWindow::DellRecords(){
     QLayoutItem* item;
@@ -46,20 +48,20 @@ void ResultWindow::DellRecords(){
 
 void ResultWindow::AddRecord(ResultRecord* record){
 
-    QWidget* record_widget;
+    QWidget* record_widget = new QWidget(this);
     QVBoxLayout* widget_layout = new QVBoxLayout(record_widget);
+    record->InitRecord();
     widget_layout->addWidget(record);
 
     QHBoxLayout* del_layout = new QHBoxLayout();
     {
         QSpacerItem* spacer = new QSpacerItem(20, 20, QSizePolicy::Maximum,
                                               QSizePolicy::Maximum);
-        DelButton* del_buton = new DelButton(this);
+        DelButton* del_buton = new DelButton(record_widget);
         del_layout->addItem(spacer);
         del_layout->addWidget(del_buton);
     }
     widget_layout->addLayout(del_layout);
-
 
     records_layout->insertWidget(0, record_widget);
     records.push_back(record);

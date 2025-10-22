@@ -1,10 +1,10 @@
 #include "CalcFunctions.h"
 #include <algorithm>
-
+#include <QDebug>
 
 std::vector<double> CalcFunc::CalculateOptimalStrategy(Matrix<double> matrix, std::vector<bool> max_sings){
     std::vector<std::vector<double>> sings;
-    std::vector<double> weight = matrix.GetRow(matrix.GetRowsCount()-1);
+    std::vector<double> weight = matrix.GetRow(matrix.GetRowsCount() - 1);
     matrix.RemoveRow(matrix.GetRowsCount()-1);
     for(int i = 0; i < matrix.GetColumnsCount(); i++){
         if(max_sings[i]){
@@ -17,19 +17,17 @@ std::vector<double> CalcFunc::CalculateOptimalStrategy(Matrix<double> matrix, st
     }
 
     std::vector<std::vector<double>> transpose_sings;
-    for(int i = 0; i < sings.size(); i++){
+    for(int i = 0; i < sings[0].size(); i++){
         std::vector<double> row;
-        for(int j = 0; j < sings[0].size(); j++){
-            row.push_back(sings[i][j]);
+        for(int j = 0; j < sings.size(); j++){
+            row.push_back(sings[j][i]);
         }
         transpose_sings.push_back(row);
     }
-
     std::vector<double> result;
     for(int i = 0; i < transpose_sings.size(); i++){
         result.push_back(FunctionTarget(transpose_sings[i], weight));
     }
-
     return result;
 }
 

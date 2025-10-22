@@ -3,10 +3,13 @@
 
 #include "MatrixRow.h"
 
+
 template<typename T>
 class Matrix{
 public:
     explicit Matrix(int rows, int columns){
+
+
 
         if (rows <= 0 || columns <= 0){
             this->rows = 1;
@@ -17,10 +20,13 @@ public:
             this->columns = static_cast<size_t>(columns);
         }
 
+
+
         matrix.reserve(this->rows);
         for (int i = 0; i < this->rows; i++) {
-            matrix.emplace_back(this->columns);
+            matrix.emplace_back(MatrixRow<T>(this->columns));
         }
+
     }
     ~Matrix() = default;
 public:
@@ -51,12 +57,14 @@ public:
 
     inline void RemoveRow(int idx){
         matrix.erase(matrix.begin() + idx);
+        rows--;
     }
 
     inline void RemoveColumn(int idx){
         for(int i = 0; i < rows; i++){
             matrix[i].RemoveItem(idx);
         }
+        columns--;
     }
 
     inline size_t GetColumnsCount() const{

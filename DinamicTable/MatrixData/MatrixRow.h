@@ -1,7 +1,7 @@
 #ifndef MATRIXROW_H
 #define MATRIXROW_H
 #include <vector>
-
+#include <QDebug>
 template<typename T>
 class MatrixRow{
 public:
@@ -11,16 +11,17 @@ public:
         else
             elms = 1;
 
-        row.reserve(this->elms);
+        for(int i = 0; i < this->elms; i++)
+            row.emplace_back(T{});
     }
     ~MatrixRow() = default;
 public:
     T& operator[](int index) {
-        return row[static_cast<size_t>(index)];
+        return row[index];
     }
 
     const T& operator[](int index) const {
-        return row[static_cast<size_t>(index)];
+        return row[index];
     }
 
     size_t GetSize() const {
@@ -29,6 +30,7 @@ public:
 
     inline void RemoveItem(int idx){
         row.erase(row.begin() + idx);
+        elms--;
     }
 private:
     std::vector<T> row;
