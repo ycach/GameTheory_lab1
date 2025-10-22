@@ -32,6 +32,40 @@ public:
         return matrix[index];
     }
 
+    inline std::vector<T> GetColumn(int idx) const{
+        std::vector<T> column;
+        for(int i = 0; i < rows; i++){
+            column.push_back(matrix[i][idx]);
+        }
+
+        return column;
+    }
+    inline std::vector<T> GetRow(int idx) const{
+        std::vector<T> row;
+        for(int i = 0; i < columns; i++){
+            row.push_back(matrix[idx][i]);
+        }
+
+        return row;
+    }
+
+    inline void RemoveRow(int idx){
+        matrix.erase(matrix.begin() + idx);
+    }
+
+    inline void RemoveColumn(int idx){
+        for(int i = 0; i < rows; i++){
+            matrix[i].RemoveItem(idx);
+        }
+    }
+
+    inline size_t GetColumnsCount() const{
+        return columns;
+    }
+    inline size_t GetRowsCount() const{
+        return rows;
+    }
+
 
 private:
     std::vector<MatrixRow<T>> matrix;

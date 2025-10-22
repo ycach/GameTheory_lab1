@@ -26,6 +26,10 @@ public:
     size_t GetSize() const {
         return row.size();
     }
+
+    inline void RemoveItem(int idx){
+        row.erase(row.begin() + idx);
+    }
 private:
     std::vector<T> row;
     size_t elms;
